@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import baseball.service.ComputerService;
+import baseball.service.ComputerServiceTest;
+import baseball.service.PlayerService;
 import baseball.service.ValidatorServiceTest;
 import baseball.vo.enumtype.InterfaceMsg;
 import baseball.vo.enumtype.ValidationMsg;
@@ -17,6 +19,10 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 
 public class OperatorControllerTest  extends NsTest {
     private ComputerService computerService = ComputerService.getInstance();
+    private ComputerServiceTest computerServiceTest = ComputerServiceTest.getInstance();
+    private PlayerService playerService = PlayerService.getInstance();
+
+    private String inputGameNumber;
 
     @Test
     void Computer에게_새로운_야구게임이_시작됨을_알리고_Computer로부터_받은_값_출력() {
@@ -56,7 +62,25 @@ public class OperatorControllerTest  extends NsTest {
         });
     }
 
+    @Test
+    void player가_가진_숫자값과_computer가_가진_숫자값_비교() {
+        // give
+        String inputGameNumber = "365";
+        // when
+        playerService.setPlayerInputGameNumber(inputGameNumber);
+        computerServiceTest.setPlayerInputGameNumberList(playerService.getPlayerInputGameNumberDto().getGameNumberList());
+        // then
+        assertEquals(inputGameNumber, listInteger2String(computerServiceTest.getPlayerInputGameNumberList()));
+    }
 
+    /**
+     * List<Integer>를 입력받아, 하나의 문자열로 반환
+     * @param playerInputList
+     * @return
+     */
+    private String listInteger2String(List<Integer> playerInputList) {
+        return playerInputList.toString().replaceAll("[^0-9]", "");
+    }
 
     @Override
     protected void runMain() {

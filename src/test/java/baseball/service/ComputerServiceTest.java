@@ -10,23 +10,21 @@ import baseball.vo.RuleVo;
 import baseball.vo.enumtype.Inclusive;
 import camp.nextstep.edu.missionutils.Randoms;
 
-/**
- * 야구게임에서 상대방(컴퓨터)의 역할을 하는 Computer Service
- */
-public class ComputerService {
+public class ComputerServiceTest {
     private GameNumberDto gameNumberDto;
     private List<Integer> playerInputGameNumberList; // player가 입력한 게임 입력값
 
+
     // start: Singleton Holder
-    private ComputerService() {
+    private ComputerServiceTest() {
     }
 
-    private static class InnerComputerService {
-        private static final ComputerService instance = new ComputerService();
+    private static class InnerComputerServiceTest {
+        private static final ComputerServiceTest instance = new ComputerServiceTest();
     }
 
-    public static ComputerService getInstance() {
-        return InnerComputerService.instance;
+    public static ComputerServiceTest getInstance() {
+        return ComputerServiceTest.InnerComputerServiceTest.instance;
     }
     // end: Singleton Holder
 
@@ -68,5 +66,9 @@ public class ComputerService {
      */
     public void setPlayerInputGameNumberList(List<Integer> playerInputGameNumberList) {
         this.playerInputGameNumberList = playerInputGameNumberList;
+    }
+
+    public List<Integer> getPlayerInputGameNumberList() {
+        return playerInputGameNumberList;
     }
 }
