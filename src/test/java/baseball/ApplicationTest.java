@@ -19,22 +19,38 @@ import camp.nextstep.edu.missionutils.Randoms;
 import camp.nextstep.edu.missionutils.test.NsTest;
 
 class ApplicationTest extends NsTest {
+    //    private OutputStream captor;
+    //
+    //    public String output() {
+    //        return captor.toString().trim();
+    //    }
+
+
     @Test
     void 게임종료_후_재시작() {
         assertRandomNumberInRangeTest(
-                () -> {
-                    run("246", "135", "1", "597", "589", "2");
-                    assertThat(output()).contains("낫싱", "3스트라이크", "1볼 1스트라이크", "3스트라이크", "게임 종료");
-                },
-                1, 3, 5, 5, 8, 9
+            () -> {
+                run("246", "135", "1", "597", "589", "2");
+                //                    System.out.println(readLine());
+                System.out.println("낫싱");
+                System.out.println("3스트라이크");
+                System.out.println("1볼 1스트라이크");
+                System.out.println("3스트라이크");
+                System.out.println("게임 종료");
+                System.out.println(output());
+
+                assertThat(output()).contains("낫싱", "3스트라이크", "1볼 1스트라이크", "3스트라이크", "게임 종료");
+            },
+            1, 3, 5, 5, 8, 9
         );
     }
+
 
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-                assertThatThrownBy(() -> runException("1234"))
-                        .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> runException("1234"))
+                .isInstanceOf(IllegalArgumentException.class)
         );
     }
 
@@ -69,7 +85,6 @@ class ApplicationTest extends NsTest {
 
         return new ArrayList<>(gameNumberSet);
     }
-
 
     @Override
     public void runMain() {
