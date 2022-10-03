@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import baseball.vo.RuleVo;
 import baseball.vo.enumtype.Inclusive;
 import camp.nextstep.edu.missionutils.Randoms;
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -45,7 +46,7 @@ class ApplicationTest extends NsTest {
     @Test
     void Randoms_pickNumberInRange_사용_테스트() {
         // give
-        final int gameNumbersLen = 3;
+        final int gameNumbersLen = RuleVo.getGameNumbersLen();
 
         // when
         List<Integer> gameNumberList = getGameNumberList();
@@ -60,12 +61,11 @@ class ApplicationTest extends NsTest {
      * @return gameNumberList : List<Integer>
      */
     public List<Integer> getGameNumberList() {
-        final int gameNumbersLen = 3;
         final Set<Integer> gameNumberSet = new HashSet<>();
 
         do {
             gameNumberSet.add(Randoms.pickNumberInRange(Inclusive.START.getValue(), Inclusive.END.getValue()));
-        } while (gameNumberSet.size() < gameNumbersLen);
+        } while (gameNumberSet.size() < RuleVo.getGameNumbersLen());
 
         return new ArrayList<>(gameNumberSet);
     }
