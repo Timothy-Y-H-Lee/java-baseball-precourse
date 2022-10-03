@@ -6,7 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -46,25 +48,26 @@ class ApplicationTest extends NsTest {
         final int gameNumbersLen = 3;
 
         // when
-        Set<Integer> gameNumberSet = getGameNumberSet();
+        List<Integer> gameNumberList = getGameNumberList();
 
         // then
-        assertEquals(gameNumbersLen, gameNumberSet.size());
-        System.out.println(gameNumberSet);
+        assertEquals(gameNumbersLen, gameNumberList.size());
+        System.out.println(gameNumberList);
     }
 
     /**
      * 야구게임에서 컴퓨터가 가진 숫자 생성
-     * @return gameNumberSet : Set<Integer>
+     * @return gameNumberList : List<Integer>
      */
-    public Set<Integer> getGameNumberSet() {
+    public List<Integer> getGameNumberList() {
         final int gameNumbersLen = 3;
         final Set<Integer> gameNumberSet = new HashSet<>();
 
         do {
             gameNumberSet.add(Randoms.pickNumberInRange(Inclusive.START.getValue(), Inclusive.END.getValue()));
         } while (gameNumberSet.size() < gameNumbersLen);
-        return gameNumberSet;
+
+        return new ArrayList<>(gameNumberSet);
     }
 
 
